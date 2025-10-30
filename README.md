@@ -1,17 +1,17 @@
 # shopify-etl-pipeline-aws
 ETL pipeline that extracts Shopify product data, loads it into S3, catalogs with AWS Glue, queries via Athena and visualize with quicksight
 Shopify ETL Pipeline on AWS
-Overview
+**Overview**
 
 This project implements a full end-to-end ETL (Extract, Transform, Load) pipeline for Shopify product data using AWS services. The pipeline extracts product data from a Shopify store, transforms it into a queryable format, stores it in Amazon S3, catalogs it using AWS Glue, and enables fast analysis with Amazon Athena.
 
 The project demonstrates cloud-based data engineering, automation, and handling of structured and semi-structured JSON data.
 
-Architecture
+**Architecture**
 Shopify API --> AWS Lambda --> S3 (partitioned by date) --> AWS Glue Catalog --> Amazon Athena--> Quicksight
 
 
-Workflow:
+**Workflow:**
 
 Lambda function fetches product data from Shopify.
 
@@ -21,21 +21,21 @@ AWS Glue Crawler updates the data catalog automatically.
 
 Athena is used to query and analyze product data.
 
-Technologies Used
+**Technologies Used
+**
+**AWS Lambda** – Serverless compute for data extraction.
 
-AWS Lambda – Serverless compute for data extraction.
+**Amazon S3** – Scalable storage for raw product data.
 
-Amazon S3 – Scalable storage for raw product data.
+**AWS Glue** – Catalogs data and creates tables for querying.
 
-AWS Glue – Catalogs data and creates tables for querying.
+**Amazon Athena** – Serverless query engine for analyzing the data.
 
-Amazon Athena – Serverless query engine for analyzing the data.
+**Python** – Language for Lambda scripts and data processing.
 
-Python – Language for Lambda scripts and data processing.
+**JSON / NDJSON **– Data format for structured product information.
 
-JSON / NDJSON – Data format for structured product information.
-
-Features
+**Features**
 
 Incremental product data fetching from Shopify API.
 
@@ -47,7 +47,7 @@ Query product information with Athena using SQL.
 
 Supports multiple product variants and options.
 
-Sample JSON Data
+**Sample JSON Data**
 {
   "id": 7049855008866,
   "title": "Bath Duck V",
@@ -60,8 +60,8 @@ Sample JSON Data
   ],
   "date": "2025-10-29"
 }
-
-Example Athena Query
+**
+Example Athena Query**
 -- Fetch all products with inventory > 0
 SELECT
     id,
@@ -73,7 +73,7 @@ FROM shopifyetlproduct.products
 WHERE date = '2025-10-29'
 AND JSON_EXTRACT(variants, '$[*].inventory_quantity') > 0;
 
-Setup / How to Run
+**Setup / How to Run**
 
 Note: This assumes you have AWS credentials with permissions for Lambda, S3, Glue, and Athena.
 
